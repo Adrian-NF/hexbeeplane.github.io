@@ -133,9 +133,8 @@ class Particle {
 }
 
 function mousePressed() {
-  if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
-    let fs = fullscreen();
-    fullscreen(!fs);
+  if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight && fullscreen() == false) {
+    fullscreen(true);
   }
 }
 
