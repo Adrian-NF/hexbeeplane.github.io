@@ -1,7 +1,3 @@
-/*
-* @name Drawing
-* @description Generative painting program.
-*/
 
 // All the paths
 let paths = [];
@@ -133,11 +129,10 @@ class Particle {
 }
 
 function mousePressed() {
-  if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight && fullscreen() == false) {
-    fullscreen(true);
-  }
+    fullscreen(true); 
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+
