@@ -15,7 +15,7 @@ let previous;
 
 function setup() {
   fullscreen();
-  createCanvas(width, height);
+  createCanvas(displayWidth, displayHeight);
   current = createVector(0,0);
   previous = createVector(0,0);
 };
