@@ -21,7 +21,7 @@ function setup() {
 };
 
 function draw() {
-  background(0, 100, 100);
+  background(0, 255, 255);
   
   // If it's time for a new point
   if (millis() > next && painting) {
