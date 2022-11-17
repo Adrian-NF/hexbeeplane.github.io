@@ -13,13 +13,6 @@ let next = 0;
 let current;
 let previous;
 
-function mousePressed() {
-  if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
-    let fs = fullscreen();
-    fullscreen(!fs);
-  }
-}
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   fullscreen();
@@ -27,8 +20,15 @@ function setup() {
   previous = createVector(0,0);
 };
 
+function mousePressed() {
+  if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
+    let fs = fullscreen();
+    fullscreen(!fs);
+  }
+}
+
 function draw() {
-  background(255, 255, 0);
+  background(0, 255, 0);
   
   // If it's time for a new point
   if (millis() > next && painting) {
