@@ -13,6 +13,13 @@ let next = 0;
 let current;
 let previous;
 
+function mousePressed() {
+  if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
+    let fs = fullscreen();
+    fullscreen(!fs);
+  }
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   fullscreen();
@@ -130,4 +137,10 @@ class Particle {
       line(this.position.x, this.position.y, other.position.x, other.position.y);
     }
   }
+}
+
+
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
