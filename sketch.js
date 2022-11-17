@@ -14,7 +14,8 @@ let current;
 let previous;
 
 function setup() {
-  createCanvas(720, 400);
+  fullscreen();
+  createCanvas(width, height);
   current = createVector(0,0);
   previous = createVector(0,0);
 };
