@@ -1,131 +1,111 @@
 
-// All the paths
-let paths = [];
-// Are we painting?
-let painting = false;
-// How long until the next circle
-let next = 0;
-// Where are we now and where were we?
-let current;
-let previous;
+var ColorR = 0;
+var ColorG = 0;
+var ColorB = 0;
+
+var Temporizador = 9;
+var Millis = 0;
+
+
+var Partes;
+
+class Particle {
+
+  constructor(){
+    this.x = random(0,width);
+    this.y = random(0,height);
+    this.r = random(3,4);
+    this.xSpeed = random(-1,1);
+    this.ySpeed = random(-1,1);
+    
+  }
+
+  createParticle() {
+    
+    noStroke();
+    fill(0, 0, 255);
+    circle(this.x,this.y,this.r);
+    
+  }
+
+  moveParticle() {
+    
+    if(this.x <= 0 || this.x >= width) {
+      
+      this.xSpeed = this.xSpeed * -1;
+      
+    }
+    
+    if(this.y <= 0 || this.y >= height) {
+      
+      this.ySpeed = this.ySpeed * -1;
+      
+    }
+    
+    this.x+=this.xSpeed;
+    this.y+=this.ySpeed;
+      
+  }
+
+  joinParticles(particles) {
+    particles.forEach(element =>{
+      let dis = dist(this.x,this.y,element.x,element.y);
+      if(dis < 80) {
+          
+
+          
+        ColorR = map((this.x  + element.x) / 2, 0, width, 242, 244);
+
+        ColorG = map((this.x  + element.x) / 2, 0, width, 242, 127);
+          
+        ColorB = map((this.x  + element.x) / 2, 0, width, 0, 1);
+
+        
+        stroke(ColorR, ColorG, ColorB);
+        strokeWeight(4);
+        line(this.x,this.y,element.x,element.y);
+      }
+    });
+  }
+}
+
+// an array to add multiple particles
+let particles = [];
+
+let logo;
+
+function preload() {
+  
+}
 
 function setup() {
+  
+  logo = loadImage('assets/Full Hexbee logo.png');
+  
   createCanvas(windowWidth, windowHeight);
-  fullscreen();
-  current = createVector(0,0);
-  previous = createVector(0,0);
-};
+  
+  for(let i = 0;i<width/6;i++){
+    particles.push(new Particle());
+  }
+  
+}
 
 function draw() {
-  background(100, 255, 255);
   
-  // If it's time for a new point
-  if (millis() > next && painting) {
-
-    // Grab mouse position      
-    current.x = mouseX;
-    current.y = mouseY;
-
-    // New particle's force is based on mouse movement
-    let force = p5.Vector.sub(current, previous);
-    force.mult(0.05);
-
-    // Add new particle
-    paths[paths.length - 1].add(current, force);
-    
-    // Schedule next circle
-    next = millis() + random(100);
-
-    // Store mouse values
-    previous.x = current.x;
-    previous.y = current.y;
-  }
-
-  // Draw all paths
-  for( let i = 0; i < paths.length; i++) {
-    paths[i].update();
-    paths[i].display();
-  }
-}
-
-// Start it up
-function mousePressed() {
-  next = 0;
-  painting = true;
-  previous.x = mouseX;
-  previous.y = mouseY;
-  paths.push(new Path());
-}
-
-// Stop
-function mouseReleased() {
-  painting = false;
-}
-
-// A Path is a list of particles
-class Path {
-  constructor() {
-    this.particles = [];
-    this.hue = random(100);
-  }
-
-  add(position, force) {
-    // Add a new particle with a position, force, and hue
-    this.particles.push(new Particle(position, force, this.hue));
+  background(95, 94, 105);
+  
+  for(let i = 0;i<particles.length;i++) {
+   // particles[i].createParticle();
+    particles[i].moveParticle();
+    particles[i].joinParticles(particles.slice(i));
   }
   
-  // Display plath
-  update() {  
-    for (let i = 0; i < this.particles.length; i++) {
-      this.particles[i].update();
-    }
-  }  
+  fill(95, 94, 105, 130);
+  noStroke();
+  rect(0, 0, windowWidth, windowHeight);
   
-  // Display plath
-  display() {    
-    // Loop through backwards
-    for (let i = this.particles.length - 1; i >= 0; i--) {
-      // If we shold remove it
-      if (this.particles[i].lifespan <= 0) {
-        this.particles.splice(i, 1);
-      // Otherwise, display it
-      } else {
-        this.particles[i].display(this.particles[i+1]);
-      }
-    }
+  image(logo, width/2 - logo.width*0.08, height/2 - logo.width*0.08, logo.width*0.08*2, logo.height*0.08*2);
   
-  }  
-}
-
-// Particles along the path
-class Particle {
-  constructor(position, force, hue) {
-    this.position = createVector(position.x, position.y);
-    this.velocity = createVector(force.x, force.y);
-    this.drag = 0.95;
-    this.lifespan = 255;
-  }
-
-  update() {
-    // Move it
-    this.position.add(this.velocity);
-    // Slow it down
-    this.velocity.mult(this.drag);
-    // Fade it out
-    this.lifespan--;
-  }
-
-  // Draw particle and connect it with a line
-  // Draw a line to another
-  display(other) {
-    stroke(0, this.lifespan);
-    fill(0, this.lifespan/2);    
-    ellipse(this.position.x,this.position.y, 8, 8);    
-    // If we need to draw a line
-    if (other) {
-      line(this.position.x, this.position.y, other.position.x, other.position.y);
-    }
-  }
 }
 
 function mousePressed() {
