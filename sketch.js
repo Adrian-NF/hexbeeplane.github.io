@@ -50,7 +50,7 @@ class Particle {
   joinParticles(particles) {
     particles.forEach(element =>{
       let dis = dist(this.x,this.y,element.x,element.y);
-      if(dis < 80) {
+      if(dis < 80* width/1920 * height/1080) {
           
 
           
@@ -84,7 +84,7 @@ function setup() {
   
   createCanvas(windowWidth, windowHeight);
   
-  for(let i = 0;i<width/6;i++){
+  for(let i = 0;i<width/6 * width/1920 * height/1080;i++){
     particles.push(new Particle());
   }
   
