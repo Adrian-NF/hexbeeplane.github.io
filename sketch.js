@@ -80,7 +80,7 @@ function preload() {
 
 function setup() {
   
-  logo = loadImage('assets/Full Hexbee logo.png');
+  logo = loadImage('Full Hexbee logo.png');
   
   createCanvas(windowWidth, windowHeight);
   
