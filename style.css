@@ -6,22 +6,12 @@ html, body {
   padding: 0;
   
   overscroll-behavior: none;
-  
-  div.sticky {
-    
+
     position: -webkit-sticky;
     
     position: sticky;
-    
-    top: 0;
-    
+
     background-color: #45444c;
-    
-    padding: 0px;
-    
-    font-size: 0px;
-    
-  }
   
 }
 
