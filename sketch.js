@@ -92,7 +92,7 @@ function setup() {
 
 function draw() {
   
-  resizeCanvas(displayWidth, displayHeight);
+  resizeCanvas(windowWidth, windowHeight);
   
   background(95, 94, 105);
   
