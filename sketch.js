@@ -92,8 +92,6 @@ function setup() {
 
 function draw() {
   
-  resizeCanvas(windowWidth, windowHeight);
-  
   background(95, 94, 105);
   
   for(let i = 0;i<particles.length;i++) {
@@ -114,3 +112,6 @@ function mousePressed() {
     fullscreen(true); 
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
