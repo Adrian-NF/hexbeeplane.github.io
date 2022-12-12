@@ -4,16 +4,6 @@ html, body {
   
   padding: 0;
   
-  overscroll-behavior: none;
-  
-  overflow: hidden;
-
-    position: -webkit-sticky;
-    
-    position: sticky;
-
-    background-color: #45444c;
-  
 }
 
 canvas {
